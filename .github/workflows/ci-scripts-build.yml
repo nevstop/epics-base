@@ -141,8 +141,6 @@ jobs:
           '**/include/*'
           '**/lib/*'
           '**/bin/*'
-          !*.d         
-          !*.obj
         if-no-files-found: ignore
     - name: Collect and show test results
       if: ${{ always() }}
