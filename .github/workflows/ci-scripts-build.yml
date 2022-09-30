@@ -136,7 +136,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: tapfiles ${{ matrix.name }}
-        path: '**/O.*/*.tap'
+        path: '**/O.*/*'
         if-no-files-found: ignore
     - name: Collect and show test results
       if: ${{ always() }}
