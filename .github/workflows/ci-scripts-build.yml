@@ -137,9 +137,9 @@ jobs:
       with:
         name: tapfiles ${{ matrix.name }}
         path: |
-          'include/*'
-          'lib/*'
-          'bin/*'
+          'include\*'
+          'lib\*'
+          'bin\*'
         if-no-files-found: ignore
     - name: Collect and show test results
       if: ${{ always() }}
