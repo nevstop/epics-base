@@ -136,10 +136,10 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: tapfiles ${{ matrix.name }}
-        path: |
-          'include\*'
-          'lib\*'
-          'bin\*'
+        path: | 
+          bin/
+          lib/
+          include/
         if-no-files-found: ignore
     - name: Collect and show test results
       if: ${{ always() }}
