@@ -140,6 +140,13 @@ jobs:
           bin/
           lib/
           include/
+          src/
+          configure/
+          templates/
+          startup/
+          documentation/
+          html/
+          !*.obj
         if-no-files-found: ignore
     - name: Collect and show test results
       if: ${{ always() }}
