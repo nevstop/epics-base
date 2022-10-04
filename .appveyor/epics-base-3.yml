@@ -1,12 +1,12 @@
-# Appveyor configuration file for EPICS Base 3.15 builds
+# Appveyor configuration file for EPICS Base 3.14 builds
 # (see also https://github.com/epics-base/ci-scripts)
 
 # branches to build
 branches:
   # whitelist
   only:
-    - 3.15
-    - /R3\.15\.\d+.*/
+    - 3.14
+    - /R3\.14\.\d+.*/
 
 # Version format
 version: base-{branch}-{build}
