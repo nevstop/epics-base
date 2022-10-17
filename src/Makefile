@@ -4,7 +4,7 @@
 # Copyright (c) 2002 The Regents of the University of California, as
 #     Operator of Los Alamos National Laboratory.
 # EPICS BASE is distributed subject to a Software License Agreement found
-# in the file LICENSE that is included with this distribution. 
+# in the file LICENSE that is included with this distribution.
 #*************************************************************************
 #
 # $Revision-Id$
@@ -92,6 +92,9 @@ excas_DEPEND_DIRS = cas as registry
 
 DIRS += cap5
 cap5_DEPEND_DIRS = ca dbStatic
+
+DIRS += lvCASApp
+lvCASApp_DEPEND_DIRS = libCom gdd dbStatic cas as registry ca db
 
 
 include $(TOP)/configure/RULES_DIRS
