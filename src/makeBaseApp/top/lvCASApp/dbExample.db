@@ -1,0 +1,51 @@
+record(ai, "yk:ai0")
+{
+	field(DESC, "Analog input No. 1")
+	field(INP, "0")
+	field(EGUF, "10")
+	field(EGU, "Counts")
+	field(HOPR, "10")
+	field(LOPR, "0")
+	field(HIHI, "8")
+	field(HIGH, "6")
+	field(LOW, "4")
+	field(LOLO, "2")
+	field(HHSV, "MAJOR")
+	field(HSV, "MINOR")
+	field(LSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(ADEL, "0.2")
+	field(MDEL, "0.2")
+	field(HYST, "0.5")
+}
+
+
+record(bi, "yk:bi0")
+{
+	field(INP, "0")
+	field(ZSV, "NO_ALARM")
+	field(OSV, "MINOR")
+	field(COSV, "INVALID")
+}
+
+record(waveform, "yk:wv0")
+{
+	field(INP, "0")
+	field(PREC, "4")
+	field(EGU, "Volts")
+	field(HOPR, "10")
+	field(LOPR, "0")
+	field(NELM, "10")
+	field(FTVL, "DOUBLE")
+}
+
+record(waveform, "yk:str0")
+{
+	field(INP, "0")
+	field(PREC, "0")
+	field(EGU, "Volts")
+	field(HOPR, "255")
+	field(LOPR, "0")
+	field(NELM, "40")
+	field(FTVL, "UCHAR")
+}

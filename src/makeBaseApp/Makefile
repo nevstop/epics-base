@@ -78,6 +78,21 @@ TEMPLATES += top/caServerApp/main.cc
 TEMPLATES += top/caServerApp/test.adl
 TEMPLATES += top/caServerApp/vxEntry.cc
 
+TEMPLATES += top/lvCASApp/Makefile
+TEMPLATES += top/lvCASApp/template.dbd
+TEMPLATES += top/lvCASApp/dbExample.db
+TEMPLATES += top/lvCASApp/lvCAS.cpp
+TEMPLATES += top/lvCASApp/lvChannel.cpp
+TEMPLATES += top/lvCASApp/lvExport.cpp
+TEMPLATES += top/lvCASApp/lvLogicRecord.cpp
+TEMPLATES += top/lvCASApp/lvNumbericRecord.cpp
+TEMPLATES += top/lvCASApp/lvPV.cpp
+TEMPLATES += top/lvCASApp/lvRecord.cpp
+TEMPLATES += top/lvCASApp/lvScalarPV.cpp
+TEMPLATES += top/lvCASApp/lvTest.cpp
+TEMPLATES += top/lvCASApp/lvVectorPV.cpp
+TEMPLATES += top/lvCASApp/lvVectorRecord.cpp
+
 TEMPLATES += top/iocBoot/Makefile
 TEMPLATES += top/iocBoot/nfsCommands@vxWorks
 TEMPLATES += top/iocBoot/nfsCommands@RTEMS
