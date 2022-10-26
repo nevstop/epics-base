@@ -12,43 +12,43 @@ extern "C" {
 #endif
 using namespace lvCASInterface;
 
-epicsShareFunc int createCAS(const char* pname,const char* dbdFile,lvCAS** pcas)
+int createCAS(const char* pname,const char* dbdFile,void** pcas)
 {
 	*pcas = new lvCAS(pname,dbdFile);
 	assert(*pcas);
 	return 0;
 }
 
-epicsShareFunc int loadDbFile(lvCAS* pcas,const char* file)
+int loadDbFile(void* pcas,const char* file)
 {
-	return pcas->loadDbFile(file);
+	return (lvCAS*)pcas->loadDbFile(file);
 }
 
-epicsShareFunc void installCallback(lvCAS* pcas,caCallback callback)
+void installCallback(void* pcas,caCallback callback)
 {
-	pcas->installCallback(callback);
+	(lvCAS*)pcas->installCallback(callback);
 }
 
-epicsShareFunc int startCAS(lvCAS* pcas)
+int startCAS(void* pcas)
 {
-	pcas->startCAS();
+	(lvCAS*)pcas->startCAS();
 	return 0;
 }
-epicsShareFunc int stopCAS(lvCAS* pcas)
+int stopCAS(void* pcas)
 {
-	pcas->stopCAS();
+	(lvCAS*)pcas->stopCAS();
 	return 0;
 }
 
-epicsShareFunc int closeCAS(lvCAS* pcas)
+int closeCAS(void* pcas)
 {
 	delete pcas;
 	return 0;
 }
 
-epicsShareFunc caStatus readI8(lvCAS* pcas,const char* pvname,aitInt8 *value)
+caStatus readI8(void* pcas,const char* pvname,aitInt8 *value)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt8);
@@ -59,14 +59,14 @@ epicsShareFunc caStatus readI8(lvCAS* pcas,const char* pvname,aitInt8 *value)
 	return s;
 }
 
-epicsShareFunc caStatus readU8(lvCAS* pcas,const char* pvname,aitUint8 *value)
+caStatus readU8(void* pcas,const char* pvname,aitUint8 *value)
 {
 	return readI8(pcas,pvname,(aitInt8*)value);
 }
 
-epicsShareFunc caStatus readI16(lvCAS* pcas,const char* pvname,aitInt16 *value)
+caStatus readI16(void* pcas,const char* pvname,aitInt16 *value)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt16);
@@ -77,14 +77,14 @@ epicsShareFunc caStatus readI16(lvCAS* pcas,const char* pvname,aitInt16 *value)
 	return s;
 }
 
-epicsShareFunc caStatus readU16(lvCAS* pcas,const char* pvname,aitUint16 *value)
+caStatus readU16(void* pcas,const char* pvname,aitUint16 *value)
 {
 	return readI16(pcas,pvname,(aitInt16*)value);
 }
 
-epicsShareFunc caStatus readI32(lvCAS* pcas,const char* pvname,aitInt32 *value)
+caStatus readI32(void* pcas,const char* pvname,aitInt32 *value)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt32);
@@ -95,14 +95,14 @@ epicsShareFunc caStatus readI32(lvCAS* pcas,const char* pvname,aitInt32 *value)
 	return s;
 }
 
-epicsShareFunc caStatus readU32(lvCAS* pcas,const char* pvname,aitUint32 *value)
+caStatus readU32(void* pcas,const char* pvname,aitUint32 *value)
 {
 	return readI32(pcas,pvname,(aitInt32*)value);
 }
 
-epicsShareFunc caStatus readFloat32(lvCAS* pcas,const char* pvname,aitFloat32 *value)
+caStatus readFloat32(void* pcas,const char* pvname,aitFloat32 *value)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumFloat32);
@@ -113,9 +113,9 @@ epicsShareFunc caStatus readFloat32(lvCAS* pcas,const char* pvname,aitFloat32 *v
 	return s;
 }
 
-epicsShareFunc caStatus readFloat64(lvCAS* pcas,const char* pvname,aitFloat64 *value)
+caStatus readFloat64(void* pcas,const char* pvname,aitFloat64 *value)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumFloat64);
@@ -126,9 +126,9 @@ epicsShareFunc caStatus readFloat64(lvCAS* pcas,const char* pvname,aitFloat64 *v
 	return s;
 }
 
-epicsShareFunc caStatus readString(lvCAS* pcas,const char* pvname,char *buffer,const int len)
+caStatus readString(void* pcas,const char* pvname,char *buffer,const int len)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumString);
@@ -140,9 +140,9 @@ epicsShareFunc caStatus readString(lvCAS* pcas,const char* pvname,char *buffer,c
 	return s;
 }
 
-epicsShareFunc caStatus writeI8(lvCAS* pcas,const char* pvname, aitInt8 value)
+caStatus writeI8(void* pcas,const char* pvname, aitInt8 value)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt8);
@@ -153,14 +153,14 @@ epicsShareFunc caStatus writeI8(lvCAS* pcas,const char* pvname, aitInt8 value)
 	return s;
 }
 
-epicsShareFunc caStatus writeU8(lvCAS* pcas,const char* pvname, aitUint8 value)
+caStatus writeU8(void* pcas,const char* pvname, aitUint8 value)
 {
 	return writeI8(pcas,pvname,value);
 }
 
-epicsShareFunc caStatus writeI16(lvCAS* pcas,const char* pvname,aitInt16 value)
+caStatus writeI16(void* pcas,const char* pvname,aitInt16 value)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt16);
@@ -171,14 +171,14 @@ epicsShareFunc caStatus writeI16(lvCAS* pcas,const char* pvname,aitInt16 value)
 	return s;
 }
 
-epicsShareFunc caStatus writeU16(lvCAS* pcas,const char* pvname,aitUint16 value)
+caStatus writeU16(void* pcas,const char* pvname,aitUint16 value)
 {
 	return writeI16(pcas,pvname,value);
 }
 
-epicsShareFunc caStatus writeI32(lvCAS* pcas,const char* pvname,aitInt32 value)
+caStatus writeI32(void* pcas,const char* pvname,aitInt32 value)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt32);
@@ -189,14 +189,14 @@ epicsShareFunc caStatus writeI32(lvCAS* pcas,const char* pvname,aitInt32 value)
 	return s;
 }
 
-epicsShareFunc caStatus writeU32(lvCAS* pcas,const char* pvname,aitUint32 value)
+caStatus writeU32(void* pcas,const char* pvname,aitUint32 value)
 {
 	return writeI32(pcas,pvname,value);
 }
 
-epicsShareFunc caStatus writeFloat32(lvCAS* pcas,const char* pvname,aitFloat32 value)
+caStatus writeFloat32(void* pcas,const char* pvname,aitFloat32 value)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumFloat32);
@@ -206,9 +206,9 @@ epicsShareFunc caStatus writeFloat32(lvCAS* pcas,const char* pvname,aitFloat32 v
 	pdd->unreference();
 	return s;
 }
-epicsShareFunc caStatus writeFloat64(lvCAS* pcas,const char* pvname,aitFloat64 value)
+caStatus writeFloat64(void* pcas,const char* pvname,aitFloat64 value)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumFloat64);
@@ -219,9 +219,9 @@ epicsShareFunc caStatus writeFloat64(lvCAS* pcas,const char* pvname,aitFloat64 v
 	return s;
 }
 
-epicsShareFunc caStatus writeString(lvCAS* pcas,const char* pvname,const char *stringIn)
+caStatus writeString(void* pcas,const char* pvname,const char *stringIn)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumString);
@@ -234,9 +234,9 @@ epicsShareFunc caStatus writeString(lvCAS* pcas,const char* pvname,const char *s
 }
 
 
-epicsShareFunc caStatus readI8Array(lvCAS* pcas,const char* pvname,aitInt8 *value,const int len)
+caStatus readI8Array(void* pcas,const char* pvname,aitInt8 *value,const int len)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt8,1u,len);
@@ -247,14 +247,14 @@ epicsShareFunc caStatus readI8Array(lvCAS* pcas,const char* pvname,aitInt8 *valu
 	return s;
 }
 
-epicsShareFunc caStatus readU8Array(lvCAS* pcas,const char* pvname,aitUint8 *value,const int len)
+caStatus readU8Array(void* pcas,const char* pvname,aitUint8 *value,const int len)
 {
 	return readI8Array(pcas,pvname,(aitInt8 *)value,len);
 }
 
-epicsShareFunc caStatus readI16Array(lvCAS* pcas,const char* pvname,aitInt16 *value,int len)
+caStatus readI16Array(void* pcas,const char* pvname,aitInt16 *value,int len)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt16,1u,len);
@@ -265,14 +265,14 @@ epicsShareFunc caStatus readI16Array(lvCAS* pcas,const char* pvname,aitInt16 *va
 	return s;
 }
 
-epicsShareFunc caStatus readU16Array(lvCAS* pcas,const char* pvname,aitUint16 *value,const int len)
+caStatus readU16Array(void* pcas,const char* pvname,aitUint16 *value,const int len)
 {
 	return readI16Array(pcas,pvname,(aitInt16 *)value,len);
 }
 
-epicsShareFunc caStatus readI32Array(lvCAS* pcas,const char* pvname,aitInt32 *value,const int len)
+caStatus readI32Array(void* pcas,const char* pvname,aitInt32 *value,const int len)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt32,1u,len);
@@ -284,14 +284,14 @@ epicsShareFunc caStatus readI32Array(lvCAS* pcas,const char* pvname,aitInt32 *va
 }
 
 
-epicsShareFunc caStatus readU32Array(lvCAS* pcas,const char* pvname,aitUint32 *value,const int len)
+caStatus readU32Array(void* pcas,const char* pvname,aitUint32 *value,const int len)
 {
 	return readI32Array(pcas,pvname,(aitInt32 *)value,len);
 }
 
-epicsShareFunc caStatus readFloat32Array(lvCAS* pcas,const char* pvname,aitFloat32 *value,const int len)
+caStatus readFloat32Array(void* pcas,const char* pvname,aitFloat32 *value,const int len)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumFloat32,1u,len);
@@ -302,9 +302,9 @@ epicsShareFunc caStatus readFloat32Array(lvCAS* pcas,const char* pvname,aitFloat
 	return s;
 }
 
-epicsShareFunc caStatus readFloat64Array(lvCAS* pcas,const char* pvname,aitFloat64 *value,const int len)
+caStatus readFloat64Array(void* pcas,const char* pvname,aitFloat64 *value,const int len)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumFloat64,1u,len);
@@ -316,9 +316,9 @@ epicsShareFunc caStatus readFloat64Array(lvCAS* pcas,const char* pvname,aitFloat
 }
 
 
-epicsShareFunc caStatus writeI8Array(lvCAS* pcas,const char* pvname,aitInt8 *value,int len)
+caStatus writeI8Array(void* pcas,const char* pvname,aitInt8 *value,int len)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt8,1u,len);
@@ -329,14 +329,14 @@ epicsShareFunc caStatus writeI8Array(lvCAS* pcas,const char* pvname,aitInt8 *val
 	return s;
 }
 
-epicsShareFunc caStatus writeU8Array(lvCAS* pcas,const char* pvname,aitUint8 *value,const int len)
+caStatus writeU8Array(void* pcas,const char* pvname,aitUint8 *value,const int len)
 {
 	return writeI8Array(pcas,pvname,(aitInt8 *)value,len);
 }
 
-epicsShareFunc caStatus writeI16Array(lvCAS* pcas,const char* pvname,aitInt16 *value,int len)
+caStatus writeI16Array(void* pcas,const char* pvname,aitInt16 *value,int len)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt16,1u,len);
@@ -347,14 +347,14 @@ epicsShareFunc caStatus writeI16Array(lvCAS* pcas,const char* pvname,aitInt16 *v
 	return s;
 }
 
-epicsShareFunc caStatus writeU16Array(lvCAS* pcas,const char* pvname,aitUint16 *value,const int len)
+caStatus writeU16Array(void* pcas,const char* pvname,aitUint16 *value,const int len)
 {
 	return writeI16Array(pcas,pvname,(aitInt16 *)value,len);
 }
 
-epicsShareFunc caStatus writeI32Array(lvCAS* pcas,const char* pvname,aitInt32 *value,const int len)
+caStatus writeI32Array(void* pcas,const char* pvname,aitInt32 *value,const int len)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt32,1u,len);
@@ -366,14 +366,14 @@ epicsShareFunc caStatus writeI32Array(lvCAS* pcas,const char* pvname,aitInt32 *v
 }
 
 
-epicsShareFunc caStatus writeU32Array(lvCAS* pcas,const char* pvname,aitUint32 *value,const int len)
+caStatus writeU32Array(void* pcas,const char* pvname,aitUint32 *value,const int len)
 {
 	return writeI32Array(pcas,pvname,(aitInt32 *)value,len);
 }
 
-epicsShareFunc caStatus writeFloat32Array(lvCAS* pcas,const char* pvname,aitFloat32 *value,const int len)
+caStatus writeFloat32Array(void* pcas,const char* pvname,aitFloat32 *value,const int len)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumFloat32,1u,len);
@@ -384,9 +384,9 @@ epicsShareFunc caStatus writeFloat32Array(lvCAS* pcas,const char* pvname,aitFloa
 	return s;
 }
 
-epicsShareFunc caStatus writeFloat64Array(lvCAS* pcas,const char* pvname,aitFloat64 *value,const int len)
+caStatus writeFloat64Array(void* pcas,const char* pvname,aitFloat64 *value,const int len)
 {
-	lvPV* pPV = pcas->findPV(pvname);
+	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumFloat64,1u,len);
