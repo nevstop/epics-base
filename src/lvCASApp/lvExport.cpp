@@ -21,22 +21,22 @@ int createCAS(const char* pname,const char* dbdFile,void** pcas)
 
 int loadDbFile(void* pcas,const char* file)
 {
-	return (lvCAS*)pcas->loadDbFile(file);
+	return ((lvCAS*)pcas)->loadDbFile(file);
 }
 
 void installCallback(void* pcas,caCallback callback)
 {
-	(lvCAS*)pcas->installCallback(callback);
+	((lvCAS*)pcas)->installCallback(callback);
 }
 
 int startCAS(void* pcas)
 {
-	(lvCAS*)pcas->startCAS();
+	((lvCAS*)pcas)->startCAS();
 	return 0;
 }
 int stopCAS(void* pcas)
 {
-	(lvCAS*)pcas->stopCAS();
+	((lvCAS*)pcas)->stopCAS();
 	return 0;
 }
 
@@ -48,7 +48,7 @@ int closeCAS(void* pcas)
 
 caStatus readI8(void* pcas,const char* pvname,aitInt8 *value)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt8);
@@ -66,7 +66,7 @@ caStatus readU8(void* pcas,const char* pvname,aitUint8 *value)
 
 caStatus readI16(void* pcas,const char* pvname,aitInt16 *value)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt16);
@@ -84,7 +84,7 @@ caStatus readU16(void* pcas,const char* pvname,aitUint16 *value)
 
 caStatus readI32(void* pcas,const char* pvname,aitInt32 *value)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt32);
@@ -102,7 +102,7 @@ caStatus readU32(void* pcas,const char* pvname,aitUint32 *value)
 
 caStatus readFloat32(void* pcas,const char* pvname,aitFloat32 *value)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumFloat32);
@@ -115,7 +115,7 @@ caStatus readFloat32(void* pcas,const char* pvname,aitFloat32 *value)
 
 caStatus readFloat64(void* pcas,const char* pvname,aitFloat64 *value)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumFloat64);
@@ -128,7 +128,7 @@ caStatus readFloat64(void* pcas,const char* pvname,aitFloat64 *value)
 
 caStatus readString(void* pcas,const char* pvname,char *buffer,const int len)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumString);
@@ -142,7 +142,7 @@ caStatus readString(void* pcas,const char* pvname,char *buffer,const int len)
 
 caStatus writeI8(void* pcas,const char* pvname, aitInt8 value)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt8);
@@ -160,7 +160,7 @@ caStatus writeU8(void* pcas,const char* pvname, aitUint8 value)
 
 caStatus writeI16(void* pcas,const char* pvname,aitInt16 value)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt16);
@@ -178,7 +178,7 @@ caStatus writeU16(void* pcas,const char* pvname,aitUint16 value)
 
 caStatus writeI32(void* pcas,const char* pvname,aitInt32 value)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumInt32);
@@ -196,7 +196,7 @@ caStatus writeU32(void* pcas,const char* pvname,aitUint32 value)
 
 caStatus writeFloat32(void* pcas,const char* pvname,aitFloat32 value)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumFloat32);
@@ -208,7 +208,7 @@ caStatus writeFloat32(void* pcas,const char* pvname,aitFloat32 value)
 }
 caStatus writeFloat64(void* pcas,const char* pvname,aitFloat64 value)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumFloat64);
@@ -221,7 +221,7 @@ caStatus writeFloat64(void* pcas,const char* pvname,aitFloat64 value)
 
 caStatus writeString(void* pcas,const char* pvname,const char *stringIn)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddScalar(gddAppType_value,aitEnumString);
@@ -236,7 +236,7 @@ caStatus writeString(void* pcas,const char* pvname,const char *stringIn)
 
 caStatus readI8Array(void* pcas,const char* pvname,aitInt8 *value,const int len)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt8,1u,len);
@@ -254,7 +254,7 @@ caStatus readU8Array(void* pcas,const char* pvname,aitUint8 *value,const int len
 
 caStatus readI16Array(void* pcas,const char* pvname,aitInt16 *value,int len)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt16,1u,len);
@@ -272,7 +272,7 @@ caStatus readU16Array(void* pcas,const char* pvname,aitUint16 *value,const int l
 
 caStatus readI32Array(void* pcas,const char* pvname,aitInt32 *value,const int len)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt32,1u,len);
@@ -291,7 +291,7 @@ caStatus readU32Array(void* pcas,const char* pvname,aitUint32 *value,const int l
 
 caStatus readFloat32Array(void* pcas,const char* pvname,aitFloat32 *value,const int len)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumFloat32,1u,len);
@@ -304,7 +304,7 @@ caStatus readFloat32Array(void* pcas,const char* pvname,aitFloat32 *value,const 
 
 caStatus readFloat64Array(void* pcas,const char* pvname,aitFloat64 *value,const int len)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumFloat64,1u,len);
@@ -318,7 +318,7 @@ caStatus readFloat64Array(void* pcas,const char* pvname,aitFloat64 *value,const 
 
 caStatus writeI8Array(void* pcas,const char* pvname,aitInt8 *value,int len)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt8,1u,len);
@@ -336,7 +336,7 @@ caStatus writeU8Array(void* pcas,const char* pvname,aitUint8 *value,const int le
 
 caStatus writeI16Array(void* pcas,const char* pvname,aitInt16 *value,int len)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt16,1u,len);
@@ -354,7 +354,7 @@ caStatus writeU16Array(void* pcas,const char* pvname,aitUint16 *value,const int 
 
 caStatus writeI32Array(void* pcas,const char* pvname,aitInt32 *value,const int len)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumInt32,1u,len);
@@ -373,7 +373,7 @@ caStatus writeU32Array(void* pcas,const char* pvname,aitUint32 *value,const int 
 
 caStatus writeFloat32Array(void* pcas,const char* pvname,aitFloat32 *value,const int len)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumFloat32,1u,len);
@@ -386,7 +386,7 @@ caStatus writeFloat32Array(void* pcas,const char* pvname,aitFloat32 *value,const
 
 caStatus writeFloat64Array(void* pcas,const char* pvname,aitFloat64 *value,const int len)
 {
-	lvPV* pPV = (lvCAS*)pcas->findPV(pvname);
+	lvPV* pPV = ((lvCAS*)pcas)->findPV(pvname);
 	if(!pPV)
 		return S_casApp_pvNotFound;
 	gdd* pdd = new gddAtomic(gddAppType_value,aitEnumFloat64,1u,len);
